@@ -6,5 +6,4 @@ export default DS.Model.extend({
   sightedAt: DS.attr('date'),
   cryptid: DS.belongsTo('cryptid'),
   witnesses: DS.hasMany('witness'),
-  isNew: DS.attr('boolean', {defaultValue: false})
 });

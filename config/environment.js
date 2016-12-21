@@ -17,6 +17,8 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
+
+
   };
 
   if (environment === 'development') {
@@ -40,6 +42,30 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
 
+  }
+
+  ENV.contentSecurityPolicy = {
+    // Deny everything by default
+    'default-src': "'none'",
+
+    // Allow scripts from https://cdn.mxpnl.com
+    'script-src': ["'self'", "liveReloadPort"],
+
+    // Allow fonts to be loaded from http://fonts.gstatic.com
+    'font-src': ["'self'"],
+
+    // Allow data (ajax/websocket) from bnr-tracker-api.herokuapp.com
+    'connect-src': ["'self'", "liveReloadPort", "https://bnr-tracker-api.herokuapp.com"],
+
+    // Allow images from the origin itself (i.e. current domain)
+    'img-src': "'self'",
+
+    // Allow inline styles and loaded CSS from http://fonts.googleapis.com
+    'style-src': ["'self'", "'unsafe-inline'"],
+
+    // `media-src` will be omitted from policy
+    // Browser will fallback to default-src for media resources (which is to deny, see above).
+    'media-src': null
   }
 
   return ENV;
